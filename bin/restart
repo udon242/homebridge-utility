@@ -1,2 +1,2 @@
 #!/bin/bash
-systemctl restart homebridge
+sudo systemctl restart homebridge

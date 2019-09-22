@@ -1,2 +1,2 @@
 #!/bin/bash
-systemctl status homebridge
+sudo systemctl status homebridge
