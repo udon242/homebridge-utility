@@ -1,0 +1,58 @@
+#!/bin/bash
+
+if [ -z "$REMO_TOKEN" ]; then
+    echo [Error] REMO_TOKEN がありません
+    exit 1
+fi
+
+CONFIG_PATH=~/.homebridge/config.json
+if [ -e $CONFIG_PATH ]; then
+    # 存在する場合
+    read -p "${CONFIG_PATH} を上書きしてよろしいですか？ (y/N): " yn
+    case "$yn" in [yY]*) ;; *) echo '中止しました'; exit 1 ;; esac
+fi
+
+cat > ${CONFIG_PATH} <<EOF
+{
+  "bridge": {
+    "name": "Homebridge",
+    "username": "CC:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154"
+  },
+
+  "description": "Homebridge",
+  "ports": {
+    "start": 52100,
+    "end": 52150
+  },
+  "accessories": [
+    {
+      "accessory": "remo-sensor",
+      "name": "センサー",
+      "deviceName": "Remo",
+      "mini": false,
+      "schedule": "*/10 * * * *",
+      "accessToken": "${REMO_TOKEN}",
+      "sensors": {
+        "temperature": true,
+        "humidity": true,
+        "light": true
+      }
+    },
+    {
+      "accessory": "NatureRemoAircon",
+      "name": "エアコン",
+      "access_token": "${REMO_TOKEN}",
+      "appliance_id": ""
+    }
+  ],
+  "platforms": []
+}
+EOF
+
+echo "[ Config file ]"
+cat ${CONFIG_PATH}
+
+SCRIPT_DIR=$(dirname $0)
+source ${SCRIPT_DIR}/restart
