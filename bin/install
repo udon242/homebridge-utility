@@ -34,7 +34,7 @@ echo "Installing homebridge."
 echo
 sudo npm install -g --unsafe-perm homebridge
 
-sudo cat >> /etc/systemd/system/homebridge.service <<'EOF'
+sudo cat > /etc/systemd/system/homebridge.service <<'EOF'
 [Unit]
 Description=run homebridge
 After=syslog.target network-online.target
