@@ -21,4 +21,5 @@ npm pack --cwd ${NATURE_REMO_AIRCON_TMP_DIR} && mv ${NATURE_REMO_AIRCON_PACKAGE}
 sudo npm install -g ${NATURE_REMO_AIRCON_TMP_DIR}/${NATURE_REMO_AIRCON_PACKAGE}
 rm -rf ${NATURE_REMO_AIRCON_TMP_DIR}
 
-source restart
+SCRIPT_DIR=$(dirname $0)
+source ${SCRIPT_DIR}/restart
