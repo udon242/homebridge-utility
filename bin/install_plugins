@@ -13,6 +13,7 @@ fi
 sudo npm install -g homebridge-nature-remo-sensor -g
 
 # homebridge-nature-remo-aircon
+# https://github.com/kmaehashi/homebridge-nature-remo-aircon
 NATURE_REMO_AIRCON_TMP_DIR=/tmp/homebridge-nature-remo-aircon
 NATURE_REMO_AIRCON_PACKAGE=homebridge-nature-remo-aircon-1.0.0.tgz
 git clone https://github.com/kmaehashi/homebridge-nature-remo-aircon.git ${NATURE_REMO_AIRCON_TMP_DIR}
