@@ -1,0 +1,54 @@
+#!/bin/bash
+
+#
+# Raspberry Piへhomebridgeのインストール
+#
+
+echo
+echo "Homebridge install script."
+echo
+
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run with sudo. Use \"sudo ${0} ${*}\"" 1>&2
+   exit 1
+fi
+
+echo
+echo "Update apt packages."
+apt-get update
+sudo apt-get install -y libavahi-compat-libdnssd-dev
+
+echo
+echo "Installing node.js."
+echo
+if !(type "node" > /dev/null 2>&1); then
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+    sudo apt-get install -y nodejs
+fi
+sudo npm install -g n
+sudo n lts
+sudo npm install -g npm
+
+echo
+echo "Installing homebridge."
+echo
+sudo npm install -g --unsafe-perm homebridge
+
+sudo cat >> /etc/systemd/system/homebridge.service <<'EOF'
+[Unit]
+Description=run homebridge
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+User=pi
+ExecStart=/usr/local/bin/homebridge
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable homebridge
