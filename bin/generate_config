@@ -5,6 +5,11 @@ if [ -z "$REMO_TOKEN" ]; then
     exit 1
 fi
 
+if [ -z "$SESAME_TOKEN" ]; then
+    echo [Error] SESAME_TOKEN がありません
+    exit 1
+fi
+
 CONFIG_PATH=~/.homebridge/config.json
 if [ -e $CONFIG_PATH ]; then
     # 存在する場合
@@ -47,7 +52,12 @@ cat > ${CONFIG_PATH} <<EOF
       "appliance_id": ""
     }
   ],
-  "platforms": []
+  "platforms": [
+    {
+      "platform": "Sesame",
+      "token": "${SESAME_TOKEN}"
+    }
+  ]
 }
 EOF
 
