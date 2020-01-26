@@ -10,6 +10,16 @@ if [ -z "$SESAME_TOKEN" ]; then
     exit 1
 fi
 
+if [ -z "$HUE_USER_KEY" ]; then
+    echo [Error] HUE_USER_KEY がありません
+    exit 1
+fi
+
+if [ -z "$HUE_USER_VALUE" ]; then
+    echo [Error] HUE_USER_VALUE がありません
+    exit 1
+fi
+
 CONFIG_PATH=~/.homebridge/config.json
 if [ -e $CONFIG_PATH ]; then
     # 存在する場合
@@ -56,6 +66,19 @@ cat > ${CONFIG_PATH} <<EOF
     {
       "platform": "Sesame",
       "token": "${SESAME_TOKEN}"
+    },
+    {
+      "platform": "Hue",
+      "users": {
+        "001788FFFEAF412D": "ZDlE1TBXGzWUc7YayBAaYXCfarw4WSx4O4yC-UuA"
+      },
+      "lights": true,
+      "classid": 1,
+      "description": "whitelist",
+      "links": [
+        "/lights/11",
+        "/lights/12"
+      ]
     }
   ]
 }

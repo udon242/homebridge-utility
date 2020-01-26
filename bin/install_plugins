@@ -24,5 +24,8 @@ rm -rf ${NATURE_REMO_AIRCON_TMP_DIR}
 # homebridge-sesame
 sudo npm install -g homebridge-sesame
 
+# homebridge-hue
+sudo npm install -g homebridge-hue
+
 SCRIPT_DIR=$(dirname $0)
 source ${SCRIPT_DIR}/restart
