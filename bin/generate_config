@@ -5,10 +5,10 @@ if [ -z "$REMO_TOKEN" ]; then
     exit 1
 fi
 
-if [ -z "$SESAME_TOKEN" ]; then
-    echo [Error] SESAME_TOKEN がありません
-    exit 1
-fi
+#if [ -z "$SESAME_TOKEN" ]; then
+#    echo [Error] SESAME_TOKEN がありません
+#    exit 1
+#fi
 
 if [ -z "$HUE_USER_KEY" ]; then
     echo [Error] HUE_USER_KEY がありません
@@ -63,10 +63,6 @@ cat > ${CONFIG_PATH} <<EOF
     }
   ],
   "platforms": [
-    {
-      "platform": "Sesame",
-      "token": "${SESAME_TOKEN}"
-    },
     {
       "platform": "Hue",
       "users": {
