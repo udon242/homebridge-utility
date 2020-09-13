@@ -1,5 +1,9 @@
 # homebridge-utility
 
+## UI
+
+http://[ip address]:8581
+
 ## Install Homebridge
 
 ```
