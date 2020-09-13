@@ -9,11 +9,8 @@ http://[ip address]:8581
 ```
 ./bin/install
 ```
-## Install Homebridge plugins
 
-```
-./bin/install_plugins
-```
+And restoring with homebridge-conifg-ui-x
 
 ## Generate Homebridge config
 
