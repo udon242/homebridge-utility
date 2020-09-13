@@ -32,23 +32,25 @@ sudo npm install -g npm
 echo
 echo "Installing homebridge."
 echo
-sudo npm install -g --unsafe-perm homebridge
+sudo npm install -g --unsafe-perm homebridge homebridge-config-ui-x
+sudo hb-service install --user homebridge
 
-sudo cat > /etc/systemd/system/homebridge.service <<'EOF'
-[Unit]
-Description=run homebridge
-After=syslog.target network-online.target
-
-[Service]
-Type=simple
-User=pi
-ExecStart=/usr/local/bin/homebridge
-Restart=on-failure
-RestartSec=10
-KillMode=process
-
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl daemon-reload
-systemctl enable homebridge
+##### hb-serviceで代替 #####
+#sudo cat > /etc/systemd/system/homebridge.service <<'EOF'
+#[Unit]
+#Description=run homebridge
+#After=syslog.target network-online.target
+#
+#[Service]
+#Type=simple
+#User=pi
+#ExecStart=/usr/local/bin/homebridge
+#Restart=on-failure
+#RestartSec=10
+#KillMode=process
+#
+#[Install]
+#WantedBy=multi-user.target
+#EOF
+#systemctl daemon-reload
+#systemctl enable homebridge
